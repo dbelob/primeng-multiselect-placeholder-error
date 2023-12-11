@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { SelectButtonOptionClickEvent } from 'primeng/selectbutton';
 
 interface City {
   name: string,
   code: string
+}
+
+interface Language {
+  name: string;
+  code: string;
 }
 
 @Component({
@@ -15,7 +22,14 @@ export class AppComponent implements OnInit {
   staticSelectedCities!: City[];
   dynamicSelectedCities!: City[];
 
+  languages: Language[] = [{name: 'English', code: 'en'}, {name: 'German', code: 'de'}];
+  selectedLanguage = 'en';
+
+  constructor(private translateService: TranslateService) {}
+
   ngOnInit() {
+    this.translateService.use('en');
+
     this.cities = [
       {name: 'New York', code: 'NY'},
       {name: 'Rome', code: 'RM'},
@@ -23,5 +37,9 @@ export class AppComponent implements OnInit {
       {name: 'Istanbul', code: 'IST'},
       {name: 'Paris', code: 'PRS'}
     ];
+  }
+
+  changeLanguage(event: SelectButtonOptionClickEvent) {
+    this.translateService.use(event.option.code);
   }
 }

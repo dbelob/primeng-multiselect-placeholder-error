@@ -3,7 +3,7 @@
     <h1>Static text in placeholder</h1>
   </div>
 
-  <div class="field col-12 md:col-6">
+  <div class="field col-12">
     <h2>Basic</h2>
     <p-multiSelect [options]="cities" [(ngModel)]="staticSelectedCities" optionLabel="name"
                    placeholder="Select a City"></p-multiSelect>
@@ -11,11 +11,18 @@
 
   <div class="field col-12">
     <h1>Dynamic text in placeholder (with pipe)</h1>
+    <label for="language">Language:</label>
+    <p-selectButton id="language" [options]="languages" [(ngModel)]="selectedLanguage" optionLabel="name" optionValue="code"
+                    (onOptionClick)="changeLanguage($event)"></p-selectButton>
   </div>
 
-  <div class="field col-12 md:col-6">
+  <div class="field col-12">
+    Value of 'selectCity' string resource: {{'selectCity' | translate}}
+  </div>
+
+  <div class="field col-12">
     <h2>Basic</h2>
     <p-multiSelect [options]="cities" [(ngModel)]="dynamicSelectedCities" optionLabel="name"
-                   placeholder="Select a City"></p-multiSelect>
+                   placeholder="{{'selectCity' | translate}}"></p-multiSelect>
   </div>
 </div>
